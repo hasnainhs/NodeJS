@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs  = require('fs');
+const port = process.env.PORT || 3000;
 var app=express();
 hbs.registerPartials(__dirname+'/views/partials');
 app.set('view engine','hbs');
@@ -13,12 +14,12 @@ app.use((req,res,next) => {
       console.log('Unable to Append');
     }
   });
-  console.log(log);
+  //console.log(log);
   next();
 });
-app.use((req,res,next) => {
-  res.render('maintenance.hbs');
-})
+// app.use((req,res,next) => {
+//   res.render('maintenance.hbs');
+// })
 app.get('/',(req, res) => {
   //res.send('<h1>Hello Express!</h1>');
   // res.send({
@@ -45,6 +46,6 @@ app.get('/bad',(req,res)=>{
     errorMessage: 'Unable to handle request'
   });
 });
-app.listen(3000,() => {
-  console.log('Server is up on port 3000');
+app.listen(port,() => {
+  console.log(`Server is up on port ${port}`);
 });
